@@ -6,42 +6,48 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Simple brute force implementation
- *
- */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 
-	private String filepath;
-	
-	/**
-	 * 
-	 * @param filepath a full or partial path to file with symptom strings in it, one per line
-	 */
-	public ReadSymptomDataFromFile (String filepath) {
-		this.filepath = filepath;
-	}
-	
-	@Override
-	public List<String> GetSymptoms() {
-		ArrayList<String> result = new ArrayList<String>();
-		
-		if (filepath != null) {
-			try {
-				BufferedReader reader = new BufferedReader (new FileReader(filepath));
-				String line = reader.readLine();
-				
-				while (line != null) {
-					result.add(line);
-					line = reader.readLine();
-				}
-				reader.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return result;
-	}
+    private String filePath;
+
+    /**
+     * Creates an {@code ReadSymptomDataFromFile} instance that reads symptoms from the provided file path.
+     *
+     * @param filepath the path to the file containing the symptom data
+     */
+    public ReadSymptomDataFromFile(String filepath) {
+
+        this.filePath = filepath;
+    }
+
+    /**
+     * Reads all symptoms from the file specified during construction.
+     * Each line of the file is symptom name.
+     *
+     * @return a list of symptom read from the input file
+     */
+    @Override
+    public List<String> getSymptoms() {
+
+        ArrayList<String> result = new ArrayList<String>();
+
+        if (filePath != null) {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(filePath));
+                String line = reader.readLine();
+
+                while (line != null) {
+                    result.add(line);
+                    line = reader.readLine();
+                }
+
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return result;
+    }
 
 }
